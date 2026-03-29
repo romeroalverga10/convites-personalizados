@@ -1,0 +1,1815 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="R&amp;E Produções - Convites personalizados para festas, casamentos, chá de bebê e muito mais. Convites animados, interativos, tecnológicos e simples." />
+  <title>R&amp;E Produções | Convites Personalizados</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    /* ===================== CSS CUSTOM PROPERTIES ===================== */
+    :root {
+      --rose-gold: #C9906A;
+      --blush: #F2C4CE;
+      --deep-rose: #A0607A;
+      --champagne: #E8D5B7;
+      --bg: #FDF8F5;
+      --surface: #FFFFFF;
+      --text: #2D1B1B;
+      --text-muted: #7A6B6B;
+      --border: #EDD5D5;
+      --whatsapp: #25D366;
+      --shadow: 0 4px 24px rgba(160, 96, 122, 0.12);
+      --shadow-hover: 0 12px 40px rgba(160, 96, 122, 0.22);
+      --radius: 16px;
+      --radius-sm: 8px;
+      --transition: 0.3s ease;
+    }
+
+    /* ===================== RESET ===================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Poppins', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    img { max-width: 100%; display: block; }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; }
+
+    /* ===================== UTILITIES ===================== */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 1.25rem; }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      color: var(--deep-rose);
+      margin-bottom: 0.5rem;
+    }
+    .section-subtitle {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 2.5rem;
+    }
+    .text-center { text-align: center; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.75rem 1.75rem; border-radius: 50px;
+      font-size: 0.9rem; font-weight: 600;
+      transition: var(--transition); cursor: pointer;
+    }
+    .btn-primary {
+      background: var(--deep-rose); color: #fff;
+    }
+    .btn-primary:hover { background: var(--rose-gold); transform: translateY(-2px); box-shadow: var(--shadow); }
+
+    .btn-outline {
+      background: transparent; color: var(--deep-rose);
+      border: 2px solid var(--deep-rose);
+    }
+    .btn-outline:hover { background: var(--deep-rose); color: #fff; transform: translateY(-2px); }
+
+    .btn-whatsapp {
+      background: var(--whatsapp); color: #fff;
+    }
+    .btn-whatsapp:hover { background: #1ebe5b; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,211,102,0.35); }
+
+    /* ===================== HEADER / NAV ===================== */
+    .header {
+      position: sticky; top: 0; z-index: 1000;
+      background: rgba(253,248,245,0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      transition: box-shadow var(--transition);
+    }
+    .header.scrolled { box-shadow: 0 2px 20px rgba(160,96,122,0.15); }
+
+    .nav { display: flex; align-items: center; justify-content: space-between; padding: 0.9rem 1.25rem; max-width: 1200px; margin: 0 auto; }
+
+    .nav-logo { display: flex; flex-direction: column; line-height: 1.1; }
+    .nav-logo-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem; font-weight: 700;
+      color: var(--deep-rose); letter-spacing: -0.5px;
+    }
+    .nav-logo-sub { font-size: 0.65rem; color: var(--rose-gold); letter-spacing: 2px; text-transform: uppercase; font-weight: 500; }
+
+    .nav-links { display: flex; align-items: center; gap: 0.1rem; flex-wrap: wrap; }
+    .nav-links a {
+      padding: 0.45rem 0.7rem; border-radius: var(--radius-sm);
+      font-size: 0.78rem; font-weight: 500; color: var(--text-muted);
+      transition: var(--transition); white-space: nowrap;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--deep-rose); background: var(--blush); }
+
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      padding: 0.5rem; border-radius: var(--radius-sm);
+    }
+    .hamburger span {
+      display: block; width: 22px; height: 2px;
+      background: var(--deep-rose); border-radius: 2px;
+      transition: var(--transition);
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none; flex-direction: column; gap: 0.25rem;
+      padding: 1rem 1.25rem; border-top: 1px solid var(--border);
+      background: var(--surface);
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      padding: 0.65rem 1rem; border-radius: var(--radius-sm);
+      font-size: 0.9rem; font-weight: 500; color: var(--text-muted);
+      transition: var(--transition);
+    }
+    .mobile-menu a:hover { color: var(--deep-rose); background: var(--blush); }
+
+    /* ===================== HERO ===================== */
+    .hero {
+      min-height: 90vh; display: flex; align-items: center;
+      background: linear-gradient(135deg, #F2C4CE 0%, #FDF8F5 55%, #E8D5B7 100%);
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute;
+      width: 500px; height: 500px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,144,106,0.15), transparent 70%);
+      top: -100px; right: -100px;
+    }
+    .hero::after {
+      content: ''; position: absolute;
+      width: 300px; height: 300px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(160,96,122,0.12), transparent 70%);
+      bottom: -50px; left: -50px;
+    }
+    .hero-decoration {
+      position: absolute; font-size: 2rem; opacity: 0.25;
+      animation: float 4s ease-in-out infinite;
+    }
+    .hero-decoration:nth-child(1) { top: 15%; left: 8%; animation-delay: 0s; }
+    .hero-decoration:nth-child(2) { top: 25%; right: 12%; animation-delay: 1s; }
+    .hero-decoration:nth-child(3) { bottom: 20%; left: 15%; animation-delay: 2s; }
+    .hero-decoration:nth-child(4) { bottom: 30%; right: 8%; animation-delay: 0.5s; }
+
+    .hero-content { position: relative; z-index: 1; text-align: center; max-width: 700px; margin: 0 auto; padding: 4rem 1.25rem; }
+    .hero-badge {
+      display: inline-block; padding: 0.35rem 1rem;
+      background: var(--blush); color: var(--deep-rose);
+      border-radius: 50px; font-size: 0.8rem; font-weight: 600;
+      letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      color: var(--deep-rose); line-height: 1.2; margin-bottom: 1.25rem;
+    }
+    .hero h1 span { color: var(--rose-gold); }
+    .hero p { font-size: 1.05rem; color: var(--text-muted); max-width: 480px; margin: 0 auto 2.5rem; }
+    .hero-ctas { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    /* ===================== EM ALTA ===================== */
+    .em-alta { padding: 5rem 0; background: var(--surface); }
+    .em-alta-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+
+    /* ===================== FILTER BAR ===================== */
+    .catalogo { padding: 5rem 0; }
+    .filter-bar {
+      display: flex; gap: 0.5rem; flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+    .filter-chip {
+      padding: 0.5rem 1.1rem; border-radius: 50px;
+      font-size: 0.82rem; font-weight: 500; cursor: pointer;
+      border: 1.5px solid var(--border); color: var(--text-muted);
+      background: var(--surface); transition: var(--transition);
+    }
+    .filter-chip:hover { border-color: var(--deep-rose); color: var(--deep-rose); }
+    .filter-chip.active { background: var(--deep-rose); color: #fff; border-color: var(--deep-rose); }
+
+    /* ===================== CATALOG GRID ===================== */
+    .catalog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem; }
+
+    /* ===================== PRODUCT CARD ===================== */
+    .card {
+      background: var(--surface); border-radius: var(--radius);
+      box-shadow: var(--shadow); overflow: hidden;
+      transition: transform var(--transition), box-shadow var(--transition);
+      opacity: 0; transform: translateY(20px);
+    }
+    .card.visible { opacity: 1; transform: translateY(0); }
+    .card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); }
+    .card.hidden { display: none; }
+
+    .card-image {
+      height: 160px; display: flex; align-items: center; justify-content: center;
+      font-size: 3rem; position: relative;
+    }
+    .card[data-category="interativo"] .card-image    { background: linear-gradient(135deg, #a2e9ba, #E8D5B7); }
+    .card[data-category="tecnologico"] .card-image   { background: linear-gradient(135deg, #D4B8E0, #C9906A33); }
+    .card[data-category="simples"] .card-image       { background: linear-gradient(135deg, #D6EAF8, #EBF5FB); }
+    .card[data-category="com-video"] .card-image     { background: linear-gradient(135deg, #A8E6CF, #DCEDC8); }
+    .card[data-category="artes-festa"] .card-image   { background: linear-gradient(135deg, #FFE082, #FFCC80); }
+    .card[data-category="animado-plus"] .card-image  { background: linear-gradient(135deg, #F8BBD0, #CE93D8); }
+    .card[data-category="infinity"] .card-image      { background: linear-gradient(135deg, #B2EBF2, #80DEEA); }
+
+    .card-badge {
+      position: absolute; top: 12px; left: 12px;
+      padding: 0.25rem 0.7rem; border-radius: 50px;
+      font-size: 0.68rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;
+      background: rgba(255,255,255,0.85); color: var(--deep-rose);
+    }
+
+    .card-body { padding: 1.25rem; }
+    .card-name { font-weight: 600; font-size: 0.95rem; margin-bottom: 0.25rem; color: var(--text); }
+    .card-sub { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.75rem; }
+    .card-price {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.5rem; color: var(--rose-gold); font-weight: 700;
+      margin-bottom: 1rem; display: block;
+    }
+    .card-btn {
+      display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+      width: 100%; padding: 0.65rem; border-radius: var(--radius-sm);
+      background: var(--whatsapp); color: #fff;
+      font-size: 0.82rem; font-weight: 600;
+      transition: var(--transition);
+    }
+    .card-btn:hover { background: #1ebe5b; transform: translateY(-1px); }
+
+    /* ===================== SOB ENCOMENDA ===================== */
+    .sob-encomenda {
+      padding: 5rem 0;
+      background: linear-gradient(135deg, var(--deep-rose) 0%, var(--rose-gold) 100%);
+      text-align: center; position: relative; overflow: hidden;
+    }
+    .sob-encomenda::before {
+      content: '✉'; position: absolute; font-size: 15rem; opacity: 0.06;
+      left: -2rem; top: 50%; transform: translateY(-50%);
+    }
+    .sob-encomenda h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); color: #fff; margin-bottom: 1rem; }
+    .sob-encomenda p { color: rgba(255,255,255,0.85); max-width: 520px; margin: 0 auto 2rem; font-size: 1rem; }
+    .sob-encomenda .btn { background: #fff; color: var(--deep-rose); }
+    .sob-encomenda .btn:hover { background: var(--champagne); transform: translateY(-2px); }
+
+    /* ===================== IDENTIDADE VISUAL ===================== */
+    .identidade { padding: 5rem 0; background: var(--surface); }
+    .identidade-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .identidade-content h2 { margin-bottom: 1rem; }
+    .identidade-content p { color: var(--text-muted); margin-bottom: 1.5rem; line-height: 1.8; }
+    .identidade-list { display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 2rem; }
+    .identidade-list li {
+      display: flex; align-items: center; gap: 0.75rem;
+      font-size: 0.9rem; color: var(--text-muted);
+    }
+    .identidade-list li::before {
+      content: '✦'; color: var(--rose-gold); font-size: 0.7rem; flex-shrink: 0;
+    }
+    .identidade-visual-demo {
+      background: linear-gradient(135deg, #F2C4CE, #E8D5B7, #F2C4CE);
+      border-radius: var(--radius); padding: 2.5rem;
+      display: flex; flex-direction: column; align-items: center; gap: 1.25rem;
+      box-shadow: var(--shadow);
+    }
+    .demo-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem; color: var(--deep-rose); font-weight: 700;
+    }
+    .demo-palette { display: flex; gap: 0.5rem; }
+    .demo-color { width: 36px; height: 36px; border-radius: 50%; border: 3px solid #fff; }
+    .demo-type { font-family: 'Dancing Script', cursive; font-size: 1.3rem; color: var(--rose-gold); }
+    .demo-card-mini {
+      background: #fff; border-radius: var(--radius-sm); padding: 1rem;
+      width: 100%; text-align: center; box-shadow: var(--shadow);
+    }
+    .demo-card-mini p { font-size: 0.78rem; color: var(--text-muted); }
+    .demo-card-mini strong { font-family: 'Playfair Display', serif; color: var(--deep-rose); }
+
+    /* ===================== COMBOS ===================== */
+    .combos { padding: 5rem 0; }
+    .combos-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+    .combo-card {
+      background: var(--surface); border-radius: var(--radius);
+      padding: 2rem; box-shadow: var(--shadow);
+      border: 2px solid transparent; position: relative;
+      transition: var(--transition);
+    }
+    .combo-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); }
+    .combo-card.featured { border-color: var(--deep-rose); }
+    .combo-badge-best {
+      position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+      background: var(--deep-rose); color: #fff;
+      padding: 0.3rem 1rem; border-radius: 50px;
+      font-size: 0.72rem; font-weight: 600; white-space: nowrap; letter-spacing: 0.5px;
+    }
+    .combo-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+    .combo-name { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--deep-rose); margin-bottom: 0.5rem; }
+    .combo-price { font-family: 'Dancing Script', cursive; font-size: 1.8rem; color: var(--rose-gold); font-weight: 700; margin-bottom: 1.25rem; }
+    .combo-items { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.5rem; }
+    .combo-items li { font-size: 0.85rem; color: var(--text-muted); display: flex; align-items: center; gap: 0.5rem; }
+    .combo-items li::before { content: '✓'; color: var(--whatsapp); font-weight: 700; }
+
+    /* ===================== FOOTER ===================== */
+    .footer {
+      background: var(--text); color: rgba(255,255,255,0.75);
+      padding: 3rem 0 1.5rem;
+    }
+    .footer-inner { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3rem; margin-bottom: 2.5rem; }
+    .footer-brand-name { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: #fff; margin-bottom: 0.5rem; }
+    .footer-brand-sub { font-size: 0.75rem; color: var(--rose-gold); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1rem; }
+    .footer-brand p { font-size: 0.85rem; line-height: 1.7; }
+    .footer-col h4 { color: #fff; font-size: 0.9rem; font-weight: 600; margin-bottom: 1rem; }
+    .footer-col ul { display: flex; flex-direction: column; gap: 0.5rem; }
+    .footer-col ul li a { font-size: 0.83rem; color: rgba(255,255,255,0.6); transition: color var(--transition); }
+    .footer-col ul li a:hover { color: var(--blush); }
+    .footer-contact { display: flex; flex-direction: column; gap: 0.6rem; }
+    .footer-contact a { display: flex; align-items: center; gap: 0.6rem; font-size: 0.83rem; color: rgba(255,255,255,0.6); transition: color var(--transition); }
+    .footer-contact a:hover { color: var(--blush); }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: gap; }
+    .footer-bottom p { font-size: 0.78rem; }
+
+    /* ===================== WHATSAPP FLOAT ===================== */
+    .whatsapp-float {
+      position: fixed; bottom: 28px; right: 28px; z-index: 999;
+      width: 58px; height: 58px; border-radius: 50%;
+      background: var(--whatsapp); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; box-shadow: 0 4px 20px rgba(37,211,102,0.45);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .whatsapp-float:hover { transform: scale(1.1); box-shadow: 0 8px 32px rgba(37,211,102,0.55); }
+    .whatsapp-float::before {
+      content: ''; position: absolute;
+      width: 100%; height: 100%; border-radius: 50%;
+      background: var(--whatsapp); opacity: 0.6;
+      animation: pulse-ring 2s ease-out infinite;
+    }
+
+    /* ===================== ANIMATIONS ===================== */
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+    @keyframes pulse-ring {
+      0% { transform: scale(1); opacity: 0.6; }
+      100% { transform: scale(1.7); opacity: 0; }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===================== RESPONSIVE ===================== */
+    @media (max-width: 900px) {
+      .identidade-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+      .footer-brand { grid-column: 1 / -1; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .catalog-grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1rem; }
+      .hero-ctas { flex-direction: column; align-items: center; }
+      .filter-bar { overflow-x: auto; flex-wrap: nowrap; padding-bottom: 0.5rem; }
+      .filter-bar::-webkit-scrollbar { height: 4px; }
+      .filter-bar::-webkit-scrollbar-track { background: var(--border); border-radius: 2px; }
+      .filter-bar::-webkit-scrollbar-thumb { background: var(--rose-gold); border-radius: 2px; }
+      .combos-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      .catalog-grid { grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+      .footer-inner { grid-template-columns: 1fr; gap: 1.5rem; }
+      .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+
+    @media (max-width: 360px) {
+      .catalog-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ===================== AUTH OVERLAY ===================== */
+    .auth-overlay {
+      position: fixed; inset: 0; z-index: 9999;
+      background: rgba(45,27,27,0.5);
+      display: none; align-items: center; justify-content: center;
+      padding: 1rem; backdrop-filter: blur(4px);
+    }
+    .auth-overlay.open { display: flex; }
+
+    /* Botão fechar modal auth */
+    .auth-close-btn {
+      position: absolute; top: 1rem; right: 1rem;
+      width: 32px; height: 32px; border-radius: 50%;
+      background: rgba(160,96,122,0.15); color: var(--deep-rose);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem; cursor: pointer; border: none;
+      transition: background var(--transition);
+    }
+    .auth-close-btn:hover { background: rgba(160,96,122,0.3); }
+
+    /* Botão Entrar no nav */
+    .btn-login-nav {
+      padding: 0.4rem 1rem; border-radius: 50px;
+      font-size: 0.8rem; font-weight: 600; cursor: pointer;
+      background: var(--deep-rose); color: #fff;
+      border: none; font-family: inherit;
+      transition: var(--transition); display: none;
+    }
+    .btn-login-nav.show { display: inline-flex; align-items: center; gap: 0.4rem; }
+    .btn-login-nav:hover { background: var(--rose-gold); }
+
+    .auth-box {
+      background: #fff; border-radius: 24px;
+      box-shadow: 0 20px 60px rgba(160,96,122,0.2);
+      width: 100%; max-width: 420px;
+      overflow: hidden;
+    }
+    .auth-logo {
+      text-align: center; padding: 2rem 2rem 1.25rem;
+      background: linear-gradient(135deg, var(--blush), var(--champagne));
+    }
+    .auth-logo-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.7rem; font-weight: 700; color: var(--deep-rose);
+    }
+    .auth-logo-sub {
+      font-size: 0.7rem; color: var(--rose-gold);
+      letter-spacing: 2px; text-transform: uppercase;
+    }
+
+    .auth-tabs {
+      display: flex; border-bottom: 2px solid var(--border);
+    }
+    .auth-tab {
+      flex: 1; padding: 1rem; text-align: center;
+      font-size: 0.9rem; font-weight: 600; color: var(--text-muted);
+      cursor: pointer; transition: var(--transition);
+      border-bottom: 3px solid transparent; margin-bottom: -2px;
+    }
+    .auth-tab.active { color: var(--deep-rose); border-bottom-color: var(--deep-rose); }
+
+    .auth-form { padding: 1.75rem 2rem 2rem; display: none; }
+    .auth-form.active { display: block; }
+
+    .auth-form h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem; color: var(--text); margin-bottom: 1.25rem;
+    }
+    .form-group { margin-bottom: 1rem; }
+    .form-group label {
+      display: block; font-size: 0.8rem; font-weight: 600;
+      color: var(--text-muted); margin-bottom: 0.4rem;
+    }
+    .form-group input {
+      width: 100%; padding: 0.75rem 1rem;
+      border: 1.5px solid var(--border); border-radius: var(--radius-sm);
+      font-family: inherit; font-size: 0.9rem; color: var(--text);
+      background: var(--bg); transition: border-color var(--transition);
+      outline: none;
+    }
+    .form-group input:focus { border-color: var(--deep-rose); background: #fff; }
+    .form-group input.error { border-color: #e74c3c; }
+
+    .auth-error {
+      background: #fdecea; color: #c0392b;
+      border-radius: var(--radius-sm); padding: 0.65rem 1rem;
+      font-size: 0.82rem; margin-bottom: 1rem; display: none;
+    }
+    .auth-error.show { display: block; }
+
+    .auth-success {
+      background: #eafaf1; color: #1e8449;
+      border-radius: var(--radius-sm); padding: 0.65rem 1rem;
+      font-size: 0.82rem; margin-bottom: 1rem; display: none;
+    }
+    .auth-success.show { display: block; }
+
+    .btn-auth {
+      width: 100%; padding: 0.85rem;
+      background: var(--deep-rose); color: #fff;
+      border-radius: var(--radius-sm); font-size: 0.95rem; font-weight: 600;
+      cursor: pointer; border: none; font-family: inherit;
+      transition: var(--transition); margin-top: 0.5rem;
+    }
+    .btn-auth:hover { background: var(--rose-gold); transform: translateY(-1px); }
+
+    /* USER MENU IN NAV */
+    .user-menu { display: none; align-items: center; gap: 0.75rem; }
+    .user-menu.visible { display: flex; }
+    .user-avatar {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--deep-rose), var(--rose-gold));
+      color: #fff; display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 0.85rem; flex-shrink: 0;
+    }
+    .user-name { font-size: 0.85rem; font-weight: 600; color: var(--deep-rose); max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .btn-logout {
+      padding: 0.35rem 0.85rem; border-radius: 50px;
+      font-size: 0.75rem; font-weight: 600; cursor: pointer;
+      border: 1.5px solid var(--border); color: var(--text-muted);
+      background: transparent; font-family: inherit; transition: var(--transition);
+    }
+    .btn-logout:hover { border-color: #e74c3c; color: #e74c3c; }
+
+    /* ===================== CART & HISTORY ===================== */
+    .cart-btn-nav {
+      position: relative; background: none; border: none; cursor: pointer;
+      padding: 0.4rem; color: var(--deep-rose); font-size: 1.2rem;
+      transition: transform var(--transition);
+    }
+    .cart-btn-nav:hover { transform: scale(1.15); }
+    .cart-badge {
+      position: absolute; top: -4px; right: -4px;
+      background: var(--deep-rose); color: #fff;
+      border-radius: 50%; width: 18px; height: 18px;
+      font-size: 0.65rem; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      display: none;
+    }
+    .cart-badge.show { display: flex; }
+
+    /* Cart sidebar */
+    .cart-overlay {
+      position: fixed; inset: 0; background: rgba(45,27,27,0.4);
+      z-index: 8000; opacity: 0; pointer-events: none; transition: opacity var(--transition);
+    }
+    .cart-overlay.open { opacity: 1; pointer-events: all; }
+
+    .cart-sidebar {
+      position: fixed; top: 0; right: -420px; width: 100%; max-width: 420px;
+      height: 100vh; background: var(--surface); z-index: 8001;
+      display: flex; flex-direction: column;
+      box-shadow: -8px 0 40px rgba(160,96,122,0.18);
+      transition: right 0.35s cubic-bezier(0.4,0,0.2,1);
+    }
+    .cart-sidebar.open { right: 0; }
+
+    .cart-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--border);
+      background: linear-gradient(135deg, var(--blush), var(--champagne));
+    }
+    .cart-header h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--deep-rose); }
+    .cart-close {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: rgba(160,96,122,0.15); color: var(--deep-rose);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem; cursor: pointer; transition: background var(--transition);
+    }
+    .cart-close:hover { background: rgba(160,96,122,0.3); }
+
+    .cart-items { flex: 1; overflow-y: auto; padding: 1rem 1.5rem; }
+    .cart-empty {
+      text-align: center; padding: 3rem 1rem;
+      color: var(--text-muted); font-size: 0.9rem;
+    }
+    .cart-empty i { font-size: 3rem; color: var(--border); display: block; margin-bottom: 1rem; }
+
+    .cart-item {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 0.85rem 0; border-bottom: 1px solid var(--border);
+    }
+    .cart-item-emoji { font-size: 1.8rem; flex-shrink: 0; }
+    .cart-item-info { flex: 1; min-width: 0; }
+    .cart-item-name { font-weight: 600; font-size: 0.88rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .cart-item-price { font-family: 'Dancing Script', cursive; color: var(--rose-gold); font-size: 1.05rem; font-weight: 700; }
+    .cart-item-qty {
+      display: flex; align-items: center; gap: 0.4rem;
+    }
+    .qty-btn {
+      width: 26px; height: 26px; border-radius: 50%;
+      background: var(--blush); color: var(--deep-rose);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.85rem; font-weight: 700; cursor: pointer;
+      transition: background var(--transition); flex-shrink: 0;
+    }
+    .qty-btn:hover { background: var(--deep-rose); color: #fff; }
+    .qty-val { font-weight: 600; font-size: 0.9rem; min-width: 20px; text-align: center; }
+    .cart-item-remove { color: #e74c3c; font-size: 0.85rem; cursor: pointer; padding: 0.25rem; transition: transform var(--transition); }
+    .cart-item-remove:hover { transform: scale(1.2); }
+
+    .cart-footer { padding: 1.25rem 1.5rem; border-top: 1px solid var(--border); }
+    .cart-total-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+    .cart-total-label { font-weight: 600; color: var(--text-muted); font-size: 0.9rem; }
+    .cart-total-val { font-family: 'Dancing Script', cursive; font-size: 1.6rem; color: var(--deep-rose); font-weight: 700; }
+    .cart-actions { display: flex; flex-direction: column; gap: 0.6rem; }
+    .btn-finalize {
+      display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+      padding: 0.85rem; border-radius: var(--radius-sm);
+      background: var(--whatsapp); color: #fff;
+      font-size: 0.9rem; font-weight: 600; cursor: pointer;
+      font-family: inherit; border: none; transition: var(--transition);
+    }
+    .btn-finalize:hover { background: #1ebe5b; transform: translateY(-1px); }
+    .btn-clear-cart {
+      display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+      padding: 0.65rem; border-radius: var(--radius-sm);
+      background: transparent; color: #e74c3c;
+      font-size: 0.8rem; font-weight: 600; cursor: pointer;
+      font-family: inherit; border: 1.5px solid #e74c3c; transition: var(--transition);
+    }
+    .btn-clear-cart:hover { background: #fdecea; }
+
+    /* Card add-to-cart button */
+    .card-actions { display: flex; flex-direction: column; gap: 0.5rem; }
+    .btn-add-cart {
+      display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+      width: 100%; padding: 0.65rem; border-radius: var(--radius-sm);
+      background: var(--deep-rose); color: #fff;
+      font-size: 0.82rem; font-weight: 600; cursor: pointer;
+      font-family: inherit; border: none; transition: var(--transition);
+    }
+    .btn-add-cart:hover { background: var(--rose-gold); transform: translateY(-1px); }
+    .btn-add-cart.added { background: #27ae60; }
+
+    /* History modal */
+    .history-overlay {
+      position: fixed; inset: 0; background: rgba(45,27,27,0.5);
+      z-index: 8500; display: none; align-items: center; justify-content: center; padding: 1rem;
+    }
+    .history-overlay.open { display: flex; }
+    .history-modal {
+      background: var(--surface); border-radius: var(--radius);
+      width: 100%; max-width: 560px; max-height: 80vh;
+      display: flex; flex-direction: column;
+      box-shadow: 0 20px 60px rgba(160,96,122,0.25);
+    }
+    .history-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--border);
+      background: linear-gradient(135deg, var(--blush), var(--champagne));
+      border-radius: var(--radius) var(--radius) 0 0;
+    }
+    .history-header h3 { font-family: 'Playfair Display', serif; color: var(--deep-rose); }
+    .history-body { overflow-y: auto; padding: 1.25rem 1.5rem; flex: 1; }
+    .history-empty { text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.9rem; }
+    .history-empty i { font-size: 2.5rem; color: var(--border); display: block; margin-bottom: 0.75rem; }
+    .history-order {
+      border: 1.5px solid var(--border); border-radius: var(--radius-sm);
+      margin-bottom: 1rem; overflow: hidden;
+    }
+    .history-order-head {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.75rem 1rem; background: var(--bg); font-size: 0.82rem;
+    }
+    .history-order-date { color: var(--text-muted); }
+    .history-order-total { font-family: 'Dancing Script', cursive; color: var(--deep-rose); font-size: 1.1rem; font-weight: 700; }
+    .history-order-items { padding: 0.75rem 1rem; }
+    .history-order-item { font-size: 0.82rem; color: var(--text-muted); padding: 0.2rem 0; display: flex; justify-content: space-between; }
+
+    /* TOAST */
+    .toast {
+      position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%) translateY(20px);
+      background: var(--text); color: #fff; padding: 0.75rem 1.5rem;
+      border-radius: 50px; font-size: 0.85rem; font-weight: 500;
+      z-index: 9998; opacity: 0; transition: all 0.4s ease; pointer-events: none;
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===================== AUTH OVERLAY ===================== -->
+  <div class="auth-overlay" id="authOverlay" onclick="handleOverlayClick(event)">
+    <div class="auth-box" style="position:relative;">
+      <button class="auth-close-btn" onclick="closeAuthModal()" title="Fechar"><i class="fa-solid fa-xmark"></i></button>
+      <div class="auth-logo">
+        <div class="auth-logo-name">R&amp;E Produções</div>
+        <div class="auth-logo-sub">Convites Personalizados</div>
+      </div>
+
+      <div class="auth-tabs">
+        <div class="auth-tab active" id="tabLogin" onclick="switchTab('login')">Entrar</div>
+        <div class="auth-tab" id="tabRegister" onclick="switchTab('register')">Cadastrar</div>
+      </div>
+
+      <!-- LOGIN -->
+      <div class="auth-form active" id="formLogin">
+        <h3>Bem-vindo de volta! 👋</h3>
+        <div class="auth-error" id="loginError"></div>
+        <div class="form-group">
+          <label>E-mail</label>
+          <input type="email" id="loginEmail" placeholder="seu@email.com" />
+        </div>
+        <div class="form-group">
+          <label>Senha</label>
+          <input type="password" id="loginPassword" placeholder="Sua senha" />
+        </div>
+        <button class="btn-auth" onclick="doLogin()">Entrar</button>
+      </div>
+
+      <!-- CADASTRO -->
+      <div class="auth-form" id="formRegister">
+        <h3>Crie sua conta 🎉</h3>
+        <div class="auth-error" id="registerError"></div>
+        <div class="auth-success" id="registerSuccess"></div>
+        <div class="form-group">
+          <label>Nome completo</label>
+          <input type="text" id="regName" placeholder="Seu nome" />
+        </div>
+        <div class="form-group">
+          <label>E-mail</label>
+          <input type="email" id="regEmail" placeholder="seu@email.com" />
+        </div>
+        <div class="form-group">
+          <label>Senha</label>
+          <input type="password" id="regPassword" placeholder="Mínimo 6 caracteres" />
+        </div>
+        <div class="form-group">
+          <label>Confirmar senha</label>
+          <input type="password" id="regConfirm" placeholder="Repita a senha" />
+        </div>
+        <button class="btn-auth" onclick="doRegister()">Criar conta</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast"></div>
+
+  <!-- ===================== HEADER ===================== -->
+  <header class="header" id="header">
+    <nav class="nav">
+      <a href="#inicio" class="nav-logo">
+        <span class="nav-logo-name">R&amp;E Produções</span>
+        <span class="nav-logo-sub">Convites Personalizados</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#inicio">Início</a></li>
+        <li><a href="#catalogo" data-filter="animado-plus">Animado Plus</a></li>
+        <li><a href="#catalogo" data-filter="com-video">Com Vídeo</a></li>
+        <li><a href="#catalogo" data-filter="simples">Simples</a></li>
+        <li><a href="#catalogo" data-filter="interativo">Interativo</a></li>
+        <li><a href="#catalogo" data-filter="tecnologico">Tecnológico</a></li>
+        <li><a href="#catalogo" data-filter="infinity">Infinity</a></li>
+        <li><a href="#sob-encomenda">Sob Encomenda</a></li>
+        <li><a href="#catalogo" data-filter="artes-festa">Artes p/ Festa</a></li>
+        <li><a href="#combos">Combos</a></li>
+        <li><a href="#identidade-visual">Id. Visual</a></li>
+      </ul>
+
+      <div class="user-menu" id="userMenu">
+        <div class="user-avatar" id="userAvatar"></div>
+        <span class="user-name" id="userName"></span>
+        <button class="btn-logout" onclick="openHistory()" style="border-color:var(--blush);color:var(--deep-rose);" title="Meus Pedidos"><i class="fa-solid fa-clock-rotate-left"></i></button>
+        <button class="btn-logout" onclick="doLogout()"><i class="fa-solid fa-arrow-right-from-bracket"></i> Sair</button>
+      </div>
+
+      <button class="btn-login-nav" id="btnLoginNav" onclick="openAuthModal()"><i class="fa-solid fa-user"></i> Entrar</button>
+
+      <button class="cart-btn-nav" id="cartBtnNav" onclick="openCart()" title="Carrinho">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <span class="cart-badge" id="cartBadge">0</span>
+      </button>
+
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#inicio">Início</a>
+      <a href="#catalogo" data-filter="animado-plus">Convite Animado Plus</a>
+      <a href="#catalogo" data-filter="com-video">Convite Com Vídeo</a>
+      <a href="#catalogo" data-filter="simples">Convite Simples</a>
+      <a href="#catalogo" data-filter="interativo">Convite Interativo</a>
+      <a href="#catalogo" data-filter="tecnologico">Convite Tecnológico</a>
+      <a href="#catalogo" data-filter="infinity">Convite Infinity</a>
+      <a href="#sob-encomenda">Sob Encomenda</a>
+      <a href="#catalogo" data-filter="artes-festa">Artes Para Sua Festa</a>
+      <a href="#combos">Combos</a>
+      <a href="#identidade-visual">Identidade Visual</a>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ===================== HERO ===================== -->
+    <section id="inicio" class="hero">
+      <span class="hero-decoration">✨</span>
+      <span class="hero-decoration">🌸</span>
+      <span class="hero-decoration">💌</span>
+      <span class="hero-decoration">🎀</span>
+      <div class="hero-content">
+        <span class="hero-badge">✨ Convites que encantam</span>
+        <h1>Convites que contam a sua <span>história</span></h1>
+        <p>Criamos convites animados, interativos e tecnológicos totalmente personalizados. Cada detalhe pensado para o seu momento especial.</p>
+        <div class="hero-ctas">
+          <a href="#catalogo" class="btn btn-primary"><i class="fa-solid fa-layer-group"></i> Ver Coleções</a>
+          <a href="https://wa.me/5511999999999?text=Olá! Gostaria de saber mais sobre os convites da R&E Produções." target="_blank" class="btn btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> Falar no WhatsApp</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== EM ALTA ===================== -->
+    <section id="em-alta" class="em-alta">
+      <div class="container">
+        <h2 class="section-title text-center">🔥 Convites em Alta</h2>
+        <p class="section-subtitle text-center">Os favoritos do momento — escolhidos por quem ama celebrar</p>
+        <div class="em-alta-grid">
+
+          <article class="card visible" data-category="interativo">
+            <div class="card-image">
+              🚀<span class="card-badge">Em Alta</span>
+            </div>
+            <div class="card-body">
+              <p class="card-name">Toy Story</p>
+              <p class="card-sub">Convite Interativo · Infantil</p>
+              <span class="card-price">R$ 50,00</span>
+              <a href="https://wa.me/5511999999999?text=Olá! Tenho interesse no convite: Toy Story" target="_blank" class="card-btn"><i class="fa-brands fa-whatsapp"></i> Pedir no WhatsApp</a>
+            </div>
+          </article>
+
+          <article class="card visible" data-category="interativo">
+            <div class="card-image">
+              🌸<span class="card-badge">Em Alta</span>
+            </div>
+            <div class="card-body">
+              <p class="card-name">Jardim Encantado</p>
+              <p class="card-sub">Convite Interativo · Infantil</p>
+              <span class="card-price">R$ 50,00</span>
+              <a href="https://wa.me/5511999999999?text=Olá! Tenho interesse no convite: Jardim Encantado" target="_blank" class="card-btn"><i class="fa-brands fa-whatsapp"></i> Pedir no WhatsApp</a>
+            </div>
+          </article>
+
+          <article class="card visible" data-category="interativo">
+            <div class="card-image">
+              🩷<span class="card-badge">Em Alta</span>
+            </div>
+            <div class="card-body">
+              <p class="card-name">Minnie Rosa</p>
+              <p class="card-sub">Convite Interativo · Infantil</p>
+              <span class="card-price">R$ 50,00</span>
+              <a href="https://wa.me/5511999999999?text=Olá! Tenho interesse no convite: Minnie Rosa" target="_blank" class="card-btn"><i class="fa-brands fa-whatsapp"></i> Pedir no WhatsApp</a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CATÁLOGO ===================== -->
+    <section id="catalogo" class="catalogo">
+      <div class="container">
+        <h2 class="section-title text-center">Catálogo Completo</h2>
+        <p class="section-subtitle text-center">Filtre por categoria e encontre o convite perfeito para o seu evento</p>
+
+        <div class="filter-bar" id="filterBar">
+          <button class="filter-chip active" data-filter="todos">Todos</button>
+          <button class="filter-chip" data-filter="interativo">Interativo</button>
+          <button class="filter-chip" data-filter="tecnologico">Tecnológico</button>
+          <button class="filter-chip" data-filter="simples">Simples</button>
+          <button class="filter-chip" data-filter="com-video">Com Vídeo</button>
+          <button class="filter-chip" data-filter="artes-festa">Artes p/ Festa</button>
+          <button class="filter-chip" data-filter="animado-plus">Animado Plus</button>
+          <button class="filter-chip" data-filter="infinity">Infinity</button>
+        </div>
+
+        <div class="catalog-grid" id="catalogGrid">
+
+          <!-- ARTES PARA FESTA -->
+          <article class="card" data-category="artes-festa">
+            <div class="card-image">🎬<span class="card-badge">Artes p/ Festa</span></div>
+            <div class="card-body">
+              <p class="card-name">Retrospectiva Animada</p>
+              <p class="card-sub">Artes Para Sua Festa</p>
+              <span class="card-price">R$ 120,00</span>
+              <a href="https://wa.me/5511999999999?text=Olá! Tenho interesse em: Retrospectiva Animada" target="_blank" class="card-btn"><i class="fa-brands fa-whatsapp"></i> Pedir no WhatsApp</a>
+            </div>
+          </article>
+
+          <article class="card" data-category="artes-festa">
+            <div class="card-image">🐻<span class="card-badge">Artes p/ Festa</span></div>
+            <div class="card-body">
+              <p class="card-name">Mascote Personalizado</p>
+              <p class="card-sub">Artes Para Sua Festa</p>
+              <span class="card-price">R$ 60,00</span>
+              <a href="https://wa.me/5511999999999?text=Olá! Tenho interesse em: Mascote Personalizado" target="_blank" class="card-btn"><i class="fa-brands fa-whatsapp"></i> Pedir no WhatsApp</a>
+            </div>
+          </article>
+
+          <article class="card" data-category="artes-festa">
+            <div class="card-image">🍽️<span class="card-badge">Artes p/ Festa</span></div>
+            <div class="card-body">
+              <p class="card-name">Cardápio / Menu Temático</p>
+              <p class="card-sub">Artes Para Sua Festa</p>
+              <span class="card-price">R$ 45,00</span>
+              <a href="https://wa.me/5511999999999?text=Olá! Tenho interesse em: Cardápio Temático" target="_blank" class="card-btn"><i class="fa-brands fa-whatsapp"></i> Pedir no WhatsApp</a>
+            </div>
+          </article>
+
+          <article class="card" data-category="artes-festa">
+            <div class="card-image">🪧<span class="card-badge">Artes p/ Festa</span></div>
+            <div class="card-body">
+              <p class="card-name">Plaquinha de Agradecimento</p>
+              <p class="card-sub">Artes Para Sua Festa</p>
+              <span class="card-price">R$ 45,00</span>
+              <a href="https://wa.me/5511999999999?text=Olá! Tenho interesse em: Plaquinha de Agradecimento" target="_blank" class="card-btn"><i class="fa-brands fa-whatsapp"></i> Pedir no WhatsApp</a>
+            </div>
+          </article>
+
+          <article class="card" data-category="artes-festa">
+            <div class="card-image">📅<span class="card-badge">Artes p/ Festa</span></div>
+            <div class="card-body">
+              <p class="card-name">Save The Date</p>
+              <p class="card-sub">Artes Para Sua Festa</p>
+              <span class="card-price">R$ 35,00</span>
+              <a href="https://wa.me/5511999999999?text=Olá! Tenho interesse em: Save The Date" target="_blank" class="card-btn"><i class="fa-brands fa-whatsapp"></i> Pedir no WhatsApp</a>
+            </div>
+          </article>
+
+          <article class="card" data-category="artes-festa">
+            <div class="card-image">🔔<span class="card-badge">Artes p/ Festa</span></div>
+            <div class="card-body">
+              <p class="card-name">Lembrete Temático</p>
+              <p class="card-sub">Artes Para Sua Festa</p>
+              <span class="card-price">R$ 30,00</span>
+              <a href="https://wa.me/5511999999999?text=Olá! Tenho interesse em: Lembrete Temático" target="_blank" class="card-btn"><i class="fa-brands fa-whatsapp"></i> Pedir no WhatsApp</a>
+            </div>
+          </article>
+
+          <!-- FAVORITOS 1 ANINHO -->
+          <article class="card" data-category="interativo">
+            <div class="card-image">🍯<span class="card-badge">1 Aninho</span></div>
+            <div class="card-body">
+              <p class="card-name">Ursinho Pooh (1 Aninho)</p>
+              <p class="card-sub">Convite Interativo</p>
+              <span class="card-price">R$ 50,00</span>
+              <a href="https://wa.me/5511999999999?text=Olá! Tenho interesse no convite: Ursinho Pooh (1 Aninho)" target="_blank" class="card-btn"><i class="fa-brands fa-whatsapp"></i> Pedir no WhatsApp</a>
+            </div>
+          </article>
+
+          <article class="card" data-category="interativo">
+            <div class="card-image">🦁<span class="card-badge">1 Aninho</span></div>
+            <div class="card-body">
+              <p class="card-name">Safari (1 Aninho)</p>
+              <p class="card-sub">Convite Interativo</p>
+              <span class="card-price">R$ 50,00</span>
+              <a href="https://wa.me/5511999999999?text=Olá! Tenho interesse no convite: Safari (1 Aninho)" target="_blank" class="card-btn"><i class="fa-brands fa-whatsapp"></i> Pedir no WhatsApp</a>
+            </div>
+          </article>
+
+          <article class="card" data-category="interativo">
+            <div class="card-image">🌊<span class="card-badge">1 Aninho</span></div>
+            <div class="card-body">
+              <p class="card-name">Moana Baby (1 Aninho)</p>
+              <p class="card-sub">Convite Interativo</p>
+              <span class="card-price">R$ 50,00</span>
+              <a href="https://wa.me/5511999999999?text=Olá! Tenho interesse no convite: Moana Baby (1 Aninho)" target="_blank" class="card-btn"><i class="fa-brands fa-whatsapp"></i> Pedir no WhatsApp</a>
+            </div>
+          </article>
+
+          <article class="card" data-category="interativo">
+            <div class="card-image">🐻<span class="card-badge">1 Aninho</span></div>
+            <div class="card-body">
+              <p class="card-name">Masha e o Urso (1 Aninho)</p>
+              <p class="card-sub">Convite Interativo</p>
+              <span class="card-price">R$ 50,00</span>
+              <a href="https://wa.me/5511999999999?text=Olá! Tenho interesse no convite: Masha e o Urso (1 Aninho)" target="_blank" class="card-btn"><i class="fa-brands fa-whatsapp"></i> Pedir no WhatsApp</a>
+            </div>
+          </article>
+
+          <article class="card" data-category="interativo">
+            <div class="card-image">🐦<span class="card-badge">1 Aninho</span></div>
+            <div class="card-body">
+              <p class="card-name">Baby Looney Tunes (1 Aninho)</p>
+              <p class="card-sub">Convite Interativo</p>
+              <span class="card-price">R$ 50,00</span>
+              <a href="https://wa.me/5511999999999?text=Olá! Tenho interesse no convite: Baby Looney Tunes (1 Aninho)" target="_blank" class="card-btn"><i class="fa-brands fa-whatsapp"></i> Pedir no WhatsApp</a>
+            </div>
+          </article>
+
+          <!-- CHÁ DE BEBÊ / REVELAÇÃO -->
+          <article class="card" data-category="tecnologico">
+            <div class="card-image">🍼<span class="card-badge">Chá de Bebê</span></div>
+            <div class="card-body">
+              <p class="card-name">Chá de Bebê — Ursinho</p>
+              <p class="card-sub">Convite Tecnológico</p>
+              <span class="card-price">R$ 80,00</span>
+              <a href="https://wa.me/5511999999999?text=Olá! Tenho interesse no convite: Chá de Bebê Ursinho" target="_blank" class="card-btn"><i class="fa-brands fa-whatsapp"></i> Pedir no WhatsApp</a>
+            </div>
+          </article>
+
+          <article class="card" data-category="tecnologico">
+            <div class="card-image">🐘<span class="card-badge">Revelação</span></div>
+            <div class="card-body">
+              <p class="card-name">Chá de Revelação — Elefante</p>
+              <p class="card-sub">Convite Tecnológico</p>
+              <span class="card-price">R$ 80,00</span>
+              <a href="https://wa.me/5511999999999?text=Olá! Tenho interesse no convite: Chá de Revelação Elefante" target="_blank" class="card-btn"><i class="fa-brands fa-whatsapp"></i> Pedir no WhatsApp</a>
+            </div>
+          </article>
+
+          <article class="card" data-category="interativo">
+            <div class="card-image">🐭<span class="card-badge">Chá de Bebê</span></div>
+            <div class="card-body">
+              <p class="card-name">Mickey Baby</p>
+              <p class="card-sub">Convite Interativo</p>
+              <span class="card-price">R$ 50,00</span>
+              <a href="https://wa.me/5511999999999?text=Olá! Tenho interesse no convite: Mickey Baby" target="_blank" class="card-btn"><i class="fa-brands fa-whatsapp"></i> Pedir no WhatsApp</a>
+            </div>
+          </article>
+
+          <!-- ADULTO / 15 ANOS -->
+          <article class="card" data-category="interativo">
+            <div class="card-image">🌹<span class="card-badge">15 Anos</span></div>
+            <div class="card-body">
+              <p class="card-name">Rosa / Rose Glitter</p>
+              <p class="card-sub">Convite Interativo · 15 Anos</p>
+              <span class="card-price">R$ 50,00</span>
+              <a href="https://wa.me/5511999999999?text=Olá! Tenho interesse no convite: Rosa/Rose Glitter (15 anos)" target="_blank" class="card-btn"><i class="fa-brands fa-whatsapp"></i> Pedir no WhatsApp</a>
+            </div>
+          </article>
+
+          <article class="card" data-category="interativo">
+            <div class="card-image">🎀<span class="card-badge">Adulto</span></div>
+            <div class="card-body">
+              <p class="card-name">Laços Preto e Branco</p>
+              <p class="card-sub">Convite Interativo · Adulto</p>
+              <span class="card-price">R$ 50,00</span>
+              <a href="https://wa.me/5511999999999?text=Olá! Tenho interesse no convite: Laços Preto e Branco" target="_blank" class="card-btn"><i class="fa-brands fa-whatsapp"></i> Pedir no WhatsApp</a>
+            </div>
+          </article>
+
+          <article class="card" data-category="simples">
+            <div class="card-image">🌷<span class="card-badge">15 Anos</span></div>
+            <div class="card-body">
+              <p class="card-name">Floral (15 anos)</p>
+              <p class="card-sub">Convite Simples · 15 Anos</p>
+              <span class="card-price">R$ 35,00</span>
+              <a href="https://wa.me/5511999999999?text=Olá! Tenho interesse no convite: Floral (15 anos)" target="_blank" class="card-btn"><i class="fa-brands fa-whatsapp"></i> Pedir no WhatsApp</a>
+            </div>
+          </article>
+
+          <article class="card" data-category="simples">
+            <div class="card-image">🎀<span class="card-badge">Adulto</span></div>
+            <div class="card-body">
+              <p class="card-name">Laço Rosa (Adulto)</p>
+              <p class="card-sub">Convite Simples · Adulto</p>
+              <span class="card-price">R$ 35,00</span>
+              <a href="https://wa.me/5511999999999?text=Olá! Tenho interesse no convite: Laço Rosa (Adulto)" target="_blank" class="card-btn"><i class="fa-brands fa-whatsapp"></i> Pedir no WhatsApp</a>
+            </div>
+          </article>
+
+          <!-- CASAMENTO -->
+          <article class="card" data-category="interativo">
+            <div class="card-image">💛<span class="card-badge">Casamento</span></div>
+            <div class="card-body">
+              <p class="card-name">Casamento Amarelo Mel</p>
+              <p class="card-sub">Convite Interativo · Casamento</p>
+              <span class="card-price">R$ 50,00</span>
+              <a href="https://wa.me/5511999999999?text=Olá! Tenho interesse no convite: Casamento Amarelo Mel" target="_blank" class="card-btn"><i class="fa-brands fa-whatsapp"></i> Pedir no WhatsApp</a>
+            </div>
+          </article>
+
+          <article class="card" data-category="interativo">
+            <div class="card-image">🧱<span class="card-badge">Casamento</span></div>
+            <div class="card-body">
+              <p class="card-name">Casamento Terracota</p>
+              <p class="card-sub">Convite Interativo · Casamento</p>
+              <span class="card-price">R$ 50,00</span>
+              <a href="https://wa.me/5511999999999?text=Olá! Tenho interesse no convite: Casamento Terracota" target="_blank" class="card-btn"><i class="fa-brands fa-whatsapp"></i> Pedir no WhatsApp</a>
+            </div>
+          </article>
+
+          <article class="card" data-category="interativo">
+            <div class="card-image">🍃<span class="card-badge">Casamento</span></div>
+            <div class="card-body">
+              <p class="card-name">Casamento Verde Oliva</p>
+              <p class="card-sub">Convite Interativo · Casamento</p>
+              <span class="card-price">R$ 50,00</span>
+              <a href="https://wa.me/5511999999999?text=Olá! Tenho interesse no convite: Casamento Verde Oliva" target="_blank" class="card-btn"><i class="fa-brands fa-whatsapp"></i> Pedir no WhatsApp</a>
+            </div>
+          </article>
+
+          <article class="card" data-category="interativo">
+            <div class="card-image">🌸<span class="card-badge">Casamento</span></div>
+            <div class="card-body">
+              <p class="card-name">Casamento Rose</p>
+              <p class="card-sub">Convite Interativo · Casamento</p>
+              <span class="card-price">R$ 50,00</span>
+              <a href="https://wa.me/5511999999999?text=Olá! Tenho interesse no convite: Casamento Rose" target="_blank" class="card-btn"><i class="fa-brands fa-whatsapp"></i> Pedir no WhatsApp</a>
+            </div>
+          </article>
+
+          <article class="card" data-category="interativo">
+            <div class="card-image">💙<span class="card-badge">Casamento</span></div>
+            <div class="card-body">
+              <p class="card-name">Casamento Azul Marinho c/ Dourado</p>
+              <p class="card-sub">Convite Interativo · Casamento</p>
+              <span class="card-price">R$ 50,00</span>
+              <a href="https://wa.me/5511999999999?text=Olá! Tenho interesse no convite: Casamento Azul Marinho c/ Dourado" target="_blank" class="card-btn"><i class="fa-brands fa-whatsapp"></i> Pedir no WhatsApp</a>
+            </div>
+          </article>
+
+          <!-- JARDIM / FAZENDINHA -->
+          <article class="card" data-category="tecnologico">
+            <div class="card-image">🌺<span class="card-badge">Jardim</span></div>
+            <div class="card-body">
+              <p class="card-name">Jardim Tecnológico</p>
+              <p class="card-sub">Convite Tecnológico</p>
+              <span class="card-price">R$ 80,00</span>
+              <a href="https://wa.me/5511999999999?text=Olá! Tenho interesse no convite: Jardim Tecnológico" target="_blank" class="card-btn"><i class="fa-brands fa-whatsapp"></i> Pedir no WhatsApp</a>
+            </div>
+          </article>
+
+          <article class="card" data-category="tecnologico">
+            <div class="card-image">🐄<span class="card-badge">Fazendinha</span></div>
+            <div class="card-body">
+              <p class="card-name">Fazendinha Tecnológica</p>
+              <p class="card-sub">Convite Tecnológico</p>
+              <span class="card-price">R$ 80,00</span>
+              <a href="https://wa.me/5511999999999?text=Olá! Tenho interesse no convite: Fazendinha Tecnológica" target="_blank" class="card-btn"><i class="fa-brands fa-whatsapp"></i> Pedir no WhatsApp</a>
+            </div>
+          </article>
+
+          <article class="card" data-category="interativo">
+            <div class="card-image">🌻<span class="card-badge">Jardim</span></div>
+            <div class="card-body">
+              <p class="card-name">Jardim Interativo</p>
+              <p class="card-sub">Convite Interativo</p>
+              <span class="card-price">R$ 50,00</span>
+              <a href="https://wa.me/5511999999999?text=Olá! Tenho interesse no convite: Jardim Interativo" target="_blank" class="card-btn"><i class="fa-brands fa-whatsapp"></i> Pedir no WhatsApp</a>
+            </div>
+          </article>
+
+          <article class="card" data-category="com-video">
+            <div class="card-image">🎥<span class="card-badge">Jardim</span></div>
+            <div class="card-body">
+              <p class="card-name">Jardim Com Vídeo</p>
+              <p class="card-sub">Convite Com Vídeo</p>
+              <span class="card-price">R$ 40,00</span>
+              <a href="https://wa.me/5511999999999?text=Olá! Tenho interesse no convite: Jardim Com Vídeo" target="_blank" class="card-btn"><i class="fa-brands fa-whatsapp"></i> Pedir no WhatsApp</a>
+            </div>
+          </article>
+
+          <article class="card" data-category="simples">
+            <div class="card-image">🐑<span class="card-badge">Fazendinha</span></div>
+            <div class="card-body">
+              <p class="card-name">Fazendinha Simples</p>
+              <p class="card-sub">Convite Simples</p>
+              <span class="card-price">R$ 35,00</span>
+              <a href="https://wa.me/5511999999999?text=Olá! Tenho interesse no convite: Fazendinha Simples" target="_blank" class="card-btn"><i class="fa-brands fa-whatsapp"></i> Pedir no WhatsApp</a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== SOB ENCOMENDA ===================== -->
+    <section id="sob-encomenda" class="sob-encomenda">
+      <div class="container" style="position:relative;z-index:1;">
+        <h2>Tem algo especial em mente?</h2>
+        <p>Criamos convites totalmente sob encomenda, adaptados ao seu tema, suas cores e ao seu jeito de celebrar. Conte pra gente sua ideia!</p>
+        <a href="https://wa.me/5511999999999?text=Olá! Gostaria de fazer um convite sob encomenda. Pode me ajudar?" target="_blank" class="btn"><i class="fa-brands fa-whatsapp"></i> Fazer Encomenda no WhatsApp</a>
+      </div>
+    </section>
+
+    <!-- ===================== IDENTIDADE VISUAL ===================== -->
+    <section id="identidade-visual" class="identidade">
+      <div class="container">
+        <div class="identidade-inner">
+          <div class="identidade-content">
+            <h2 class="section-title">Identidade Visual Completa</h2>
+            <p>Crie uma identidade única para o seu evento ou negócio. Desenvolvemos todo o material visual de forma coesa, elegante e personalizada.</p>
+            <ul class="identidade-list">
+              <li>Logo personalizada do evento</li>
+              <li>Paleta de cores exclusiva</li>
+              <li>Tipografia definida e aplicada</li>
+              <li>Kit de artes para redes sociais</li>
+              <li>Papelaria digital completa</li>
+              <li>Arquivos em alta resolução</li>
+            </ul>
+            <a href="https://wa.me/5511999999999?text=Olá! Gostaria de saber mais sobre Identidade Visual." target="_blank" class="btn btn-primary"><i class="fa-brands fa-whatsapp"></i> Solicitar Orçamento</a>
+          </div>
+          <div class="identidade-visual-demo">
+            <div class="demo-logo">R&amp;E Produções</div>
+            <div class="demo-palette">
+              <div class="demo-color" style="background:#C9906A;" title="Rosa Gold"></div>
+              <div class="demo-color" style="background:#F2C4CE;" title="Blush"></div>
+              <div class="demo-color" style="background:#A0607A;" title="Deep Rose"></div>
+              <div class="demo-color" style="background:#E8D5B7;" title="Champagne"></div>
+              <div class="demo-color" style="background:#2D1B1B;" title="Espresso"></div>
+            </div>
+            <div class="demo-type">Playfair Display & Poppins</div>
+            <div class="demo-card-mini">
+              <strong>Convite Personalizado</strong>
+              <p>Design exclusivo para o seu momento</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== COMBOS ===================== -->
+    <section id="combos" class="combos">
+      <div class="container">
+        <h2 class="section-title text-center">Combos Especiais</h2>
+        <p class="section-subtitle text-center">Economize mais combinando serviços — pacotes pensados para cada necessidade</p>
+
+        <div class="combos-grid">
+
+          <div class="combo-card">
+            <div class="combo-icon">💌</div>
+            <div class="combo-name">Combo Básico</div>
+            <div class="combo-price">A partir de R$ 80,00</div>
+            <ul class="combo-items">
+              <li>1 Convite Interativo</li>
+              <li>Save The Date</li>
+              <li>Lembrete Temático</li>
+              <li>Suporte via WhatsApp</li>
+            </ul>
+            <a href="https://wa.me/5511999999999?text=Olá! Tenho interesse no Combo Básico." target="_blank" class="btn btn-outline" style="width:100%;justify-content:center;"><i class="fa-brands fa-whatsapp"></i> Quero este combo</a>
+          </div>
+
+          <div class="combo-card featured">
+            <span class="combo-badge-best">⭐ Mais Escolhido</span>
+            <div class="combo-icon">🎉</div>
+            <div class="combo-name">Combo Premium</div>
+            <div class="combo-price">A partir de R$ 150,00</div>
+            <ul class="combo-items">
+              <li>1 Convite Tecnológico</li>
+              <li>Cardápio Temático</li>
+              <li>Plaquinha de Agradecimento</li>
+              <li>Save The Date</li>
+              <li>Lembrete Temático</li>
+            </ul>
+            <a href="https://wa.me/5511999999999?text=Olá! Tenho interesse no Combo Premium." target="_blank" class="btn btn-primary" style="width:100%;justify-content:center;"><i class="fa-brands fa-whatsapp"></i> Quero este combo</a>
+          </div>
+
+          <div class="combo-card">
+            <div class="combo-icon">👑</div>
+            <div class="combo-name">Combo Completo</div>
+            <div class="combo-price">A partir de R$ 250,00</div>
+            <ul class="combo-items">
+              <li>1 Convite Tecnológico</li>
+              <li>Retrospectiva Animada</li>
+              <li>Mascote Personalizado</li>
+              <li>Cardápio + Plaquinha</li>
+              <li>Save The Date + Lembrete</li>
+              <li>Identidade Visual básica</li>
+            </ul>
+            <a href="https://wa.me/5511999999999?text=Olá! Tenho interesse no Combo Completo." target="_blank" class="btn btn-outline" style="width:100%;justify-content:center;"><i class="fa-brands fa-whatsapp"></i> Quero este combo</a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================== CART SIDEBAR ===================== -->
+  <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+  <aside class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+      <h3><i class="fa-solid fa-bag-shopping"></i> Meu Carrinho</h3>
+      <button class="cart-close" onclick="closeCart()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <div class="cart-empty">
+        <i class="fa-solid fa-bag-shopping"></i>
+        Seu carrinho está vazio.<br>Escolha um convite para começar!
+      </div>
+    </div>
+    <div class="cart-footer" id="cartFooter" style="display:none;">
+      <div class="cart-total-row">
+        <span class="cart-total-label">Total</span>
+        <span class="cart-total-val" id="cartTotal">R$ 0,00</span>
+      </div>
+      <div class="cart-actions">
+        <button class="btn-finalize" onclick="finalizeOrder()"><i class="fa-brands fa-whatsapp"></i> Finalizar Pedido no WhatsApp</button>
+        <button class="btn-clear-cart" onclick="clearCart()"><i class="fa-solid fa-trash"></i> Limpar carrinho</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ===================== HISTORY MODAL ===================== -->
+  <div class="history-overlay" id="historyOverlay">
+    <div class="history-modal">
+      <div class="history-header">
+        <h3><i class="fa-solid fa-clock-rotate-left"></i> Meus Pedidos</h3>
+        <button class="cart-close" onclick="closeHistory()"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="history-body" id="historyBody"></div>
+    </div>
+  </div>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="footer-brand-name">R&amp;E Produções</div>
+          <div class="footer-brand-sub">Convites Personalizados</div>
+          <p>Criamos convites que transformam cada celebração em uma memória inesquecível. Do design à entrega digital, com carinho e dedicação.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Categorias</h4>
+          <ul>
+            <li><a href="#catalogo" data-filter="interativo">Convite Interativo</a></li>
+            <li><a href="#catalogo" data-filter="tecnologico">Convite Tecnológico</a></li>
+            <li><a href="#catalogo" data-filter="simples">Convite Simples</a></li>
+            <li><a href="#catalogo" data-filter="com-video">Convite Com Vídeo</a></li>
+            <li><a href="#catalogo" data-filter="artes-festa">Artes Para Festa</a></li>
+            <li><a href="#combos">Combos</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contato</h4>
+          <div class="footer-contact">
+            <a href="https://wa.me/5511999999999" target="_blank"><i class="fa-brands fa-whatsapp"></i> (11) 99999-9999</a>
+            <a href="https://instagram.com/reproducoes" target="_blank"><i class="fa-brands fa-instagram"></i> @reproducoes</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2024 R&amp;E Produções. Todos os direitos reservados.</p>
+        <p>Feito com 💌 para celebrar momentos especiais</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===================== WHATSAPP FLOAT ===================== -->
+  <a href="https://wa.me/5511999999999?text=Olá! Vim pelo site e gostaria de saber mais sobre os convites." target="_blank" class="whatsapp-float" aria-label="Falar no WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+
+  <!-- ===================== JAVASCRIPT ===================== -->
+  <script>
+    // === AUTH MODULE ===
+    function getUsers() {
+      return JSON.parse(localStorage.getItem('re_users') || '[]');
+    }
+    function saveUsers(users) {
+      localStorage.setItem('re_users', JSON.stringify(users));
+    }
+    function getSession() {
+      return JSON.parse(localStorage.getItem('re_session') || 'null');
+    }
+    function saveSession(user) {
+      localStorage.setItem('re_session', JSON.stringify(user));
+    }
+    function clearSession() {
+      localStorage.removeItem('re_session');
+    }
+
+    function switchTab(tab) {
+      document.getElementById('tabLogin').classList.toggle('active', tab === 'login');
+      document.getElementById('tabRegister').classList.toggle('active', tab === 'register');
+      document.getElementById('formLogin').classList.toggle('active', tab === 'login');
+      document.getElementById('formRegister').classList.toggle('active', tab === 'register');
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 3000);
+    }
+
+    function doRegister() {
+      const name     = document.getElementById('regName').value.trim();
+      const email    = document.getElementById('regEmail').value.trim().toLowerCase();
+      const password = document.getElementById('regPassword').value;
+      const confirm  = document.getElementById('regConfirm').value;
+      const errEl    = document.getElementById('registerError');
+      const okEl     = document.getElementById('registerSuccess');
+
+      errEl.classList.remove('show'); okEl.classList.remove('show');
+
+      if (!name || !email || !password || !confirm) {
+        errEl.textContent = 'Preencha todos os campos.'; errEl.classList.add('show'); return;
+      }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        errEl.textContent = 'E-mail inválido.'; errEl.classList.add('show'); return;
+      }
+      if (password.length < 6) {
+        errEl.textContent = 'A senha deve ter pelo menos 6 caracteres.'; errEl.classList.add('show'); return;
+      }
+      if (password !== confirm) {
+        errEl.textContent = 'As senhas não coincidem.'; errEl.classList.add('show'); return;
+      }
+
+      const users = getUsers();
+      if (users.find(u => u.email === email)) {
+        errEl.textContent = 'Este e-mail já está cadastrado.'; errEl.classList.add('show'); return;
+      }
+
+      users.push({ name, email, password });
+      saveUsers(users);
+      okEl.textContent = 'Conta criada com sucesso! Faça login para entrar.';
+      okEl.classList.add('show');
+      setTimeout(() => switchTab('login'), 1500);
+    }
+
+    function doLogin() {
+      const email    = document.getElementById('loginEmail').value.trim().toLowerCase();
+      const password = document.getElementById('loginPassword').value;
+      const errEl    = document.getElementById('loginError');
+      errEl.classList.remove('show');
+
+      if (!email || !password) {
+        errEl.textContent = 'Preencha e-mail e senha.'; errEl.classList.add('show'); return;
+      }
+
+      const users = getUsers();
+      const user = users.find(u => u.email === email && u.password === password);
+      if (!user) {
+        errEl.textContent = 'E-mail ou senha incorretos.'; errEl.classList.add('show'); return;
+      }
+
+      saveSession(user);
+      loadUserSession(user);
+      closeAuthModal();
+      showToast('Bem-vinda(o), ' + user.name.split(' ')[0] + '! 🎉');
+    }
+
+    function doLogout() {
+      clearSession();
+      document.getElementById('userMenu').classList.remove('visible');
+      document.getElementById('btnLoginNav').classList.add('show');
+      document.getElementById('loginEmail').value = '';
+      document.getElementById('loginPassword').value = '';
+      document.getElementById('loginError').classList.remove('show');
+      switchTab('login');
+    }
+
+    function loadUserSession(user) {
+      const initials = user.name.split(' ').map(n => n[0]).slice(0, 2).join('').toUpperCase();
+      document.getElementById('userAvatar').textContent = initials;
+      document.getElementById('userName').textContent = user.name.split(' ')[0];
+      document.getElementById('userMenu').classList.add('visible');
+      document.getElementById('btnLoginNav').classList.remove('show');
+    }
+
+    function openAuthModal() {
+      document.getElementById('authOverlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeAuthModal() {
+      document.getElementById('authOverlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    function handleOverlayClick(e) {
+      if (e.target === document.getElementById('authOverlay')) closeAuthModal();
+    }
+
+    // On page load — check existing session
+    (function () {
+      const session = getSession();
+      if (session) {
+        loadUserSession(session);
+        renderCartBadge();
+      } else {
+        document.getElementById('btnLoginNav').classList.add('show');
+      }
+    })();
+
+    // Allow Enter key on login inputs
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        const overlay = document.getElementById('authOverlay');
+        if (overlay.classList.contains('open')) {
+          const loginActive = document.getElementById('formLogin').classList.contains('active');
+          if (loginActive) doLogin(); else doRegister();
+        }
+      }
+    });
+
+    // === CART MODULE ===
+    function cartKey() {
+      const s = getSession();
+      return s ? 're_cart_' + s.email : 're_cart_guest';
+    }
+    function historyKey() {
+      const s = getSession();
+      return s ? 're_history_' + s.email : 're_history_guest';
+    }
+    function getCart() {
+      return JSON.parse(localStorage.getItem(cartKey()) || '[]');
+    }
+    function saveCart(cart) {
+      localStorage.setItem(cartKey(), JSON.stringify(cart));
+    }
+    function getHistory() {
+      return JSON.parse(localStorage.getItem(historyKey()) || '[]');
+    }
+    function saveHistory(h) {
+      localStorage.setItem(historyKey(), JSON.stringify(h));
+    }
+
+    function priceToNum(str) {
+      return parseFloat(str.replace('R$','').replace('.','').replace(',','.').trim()) || 0;
+    }
+    function numToPrice(n) {
+      return 'R$ ' + n.toFixed(2).replace('.',',').replace(/\B(?=(\d{3})+(?!\d))/g,'.');
+    }
+
+    function addToCart(name, price, emoji) {
+      const cart = getCart();
+      const existing = cart.find(i => i.name === name);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({ name, price, emoji, qty: 1 });
+      }
+      saveCart(cart);
+      renderCartBadge();
+      renderCartItems();
+    }
+
+    function removeFromCart(name) {
+      let cart = getCart().filter(i => i.name !== name);
+      saveCart(cart);
+      renderCartBadge();
+      renderCartItems();
+    }
+
+    function changeQty(name, delta) {
+      const cart = getCart();
+      const item = cart.find(i => i.name === name);
+      if (!item) return;
+      item.qty += delta;
+      if (item.qty <= 0) {
+        saveCart(cart.filter(i => i.name !== name));
+      } else {
+        saveCart(cart);
+      }
+      renderCartBadge();
+      renderCartItems();
+    }
+
+    function clearCart() {
+      saveCart([]);
+      renderCartBadge();
+      renderCartItems();
+    }
+
+    function renderCartBadge() {
+      const cart = getCart();
+      const total = cart.reduce((s, i) => s + i.qty, 0);
+      const badge = document.getElementById('cartBadge');
+      badge.textContent = total;
+      badge.classList.toggle('show', total > 0);
+    }
+
+    function renderCartItems() {
+      const cart = getCart();
+      const container = document.getElementById('cartItems');
+      const footer = document.getElementById('cartFooter');
+      const totalEl = document.getElementById('cartTotal');
+
+      if (cart.length === 0) {
+        container.innerHTML = '<div class="cart-empty"><i class="fa-solid fa-bag-shopping"></i>Seu carrinho está vazio.<br>Escolha um convite para começar!</div>';
+        footer.style.display = 'none';
+        return;
+      }
+
+      footer.style.display = 'block';
+      let total = 0;
+      container.innerHTML = cart.map(item => {
+        const subtotal = priceToNum(item.price) * item.qty;
+        total += subtotal;
+        return `
+          <div class="cart-item">
+            <div class="cart-item-emoji">${item.emoji}</div>
+            <div class="cart-item-info">
+              <div class="cart-item-name">${item.name}</div>
+              <div class="cart-item-price">${item.price}</div>
+            </div>
+            <div class="cart-item-qty">
+              <button class="qty-btn" onclick="changeQty('${item.name.replace(/'/g,"\\'")}', -1)">−</button>
+              <span class="qty-val">${item.qty}</span>
+              <button class="qty-btn" onclick="changeQty('${item.name.replace(/'/g,"\\'")}', 1)">+</button>
+            </div>
+            <button class="cart-item-remove" onclick="removeFromCart('${item.name.replace(/'/g,"\\'")}')"><i class="fa-solid fa-trash"></i></button>
+          </div>`;
+      }).join('');
+      totalEl.textContent = numToPrice(total);
+    }
+
+    function openCart() {
+      renderCartItems();
+      document.getElementById('cartOverlay').classList.add('open');
+      document.getElementById('cartSidebar').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeCart() {
+      document.getElementById('cartOverlay').classList.remove('open');
+      document.getElementById('cartSidebar').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function finalizeOrder() {
+      const cart = getCart();
+      if (cart.length === 0) return;
+      const session = getSession();
+      const total = cart.reduce((s, i) => s + priceToNum(i.price) * i.qty, 0);
+
+      // Save to history
+      const history = getHistory();
+      history.unshift({
+        date: new Date().toLocaleString('pt-BR'),
+        items: cart.map(i => ({ name: i.name, qty: i.qty, price: i.price })),
+        total: numToPrice(total)
+      });
+      saveHistory(history);
+
+      // Build WhatsApp message
+      const lines = cart.map(i => `• ${i.name} (x${i.qty}) — ${i.price}`).join('%0A');
+      const msg = `Olá! Sou ${session ? session.name : 'cliente'} e gostaria de fazer um pedido:%0A%0A${lines}%0A%0ATotal: ${numToPrice(total)}`;
+      window.open('https://wa.me/5511999999999?text=' + msg, '_blank');
+
+      clearCart();
+      closeCart();
+      showToast('Pedido enviado! Histórico salvo. ✓');
+    }
+
+    // === HISTORY MODULE ===
+    function openHistory() {
+      const history = getHistory();
+      const body = document.getElementById('historyBody');
+      if (history.length === 0) {
+        body.innerHTML = '<div class="history-empty"><i class="fa-solid fa-clock-rotate-left"></i>Nenhum pedido realizado ainda.</div>';
+      } else {
+        body.innerHTML = history.map((order, idx) => `
+          <div class="history-order">
+            <div class="history-order-head">
+              <span class="history-order-date"><i class="fa-regular fa-calendar"></i> ${order.date}</span>
+              <span class="history-order-total">${order.total}</span>
+            </div>
+            <div class="history-order-items">
+              ${order.items.map(i => `<div class="history-order-item"><span>${i.name} (x${i.qty})</span><span>${i.price}</span></div>`).join('')}
+            </div>
+          </div>`).join('');
+      }
+      document.getElementById('historyOverlay').classList.add('open');
+    }
+    function closeHistory() {
+      document.getElementById('historyOverlay').classList.remove('open');
+    }
+
+    // Inject "Add to Cart" buttons on all cards
+    function injectCartButtons() {
+      document.querySelectorAll('.card').forEach(card => {
+        const nameEl = card.querySelector('.card-name');
+        const priceEl = card.querySelector('.card-price');
+        const oldBtn = card.querySelector('.card-btn');
+        if (!nameEl || !priceEl || !oldBtn) return;
+
+        const name = nameEl.textContent.trim();
+        const price = priceEl.textContent.trim();
+        const emoji = card.querySelector('.card-image') ? card.querySelector('.card-image').textContent.replace(/\s/g,'')[0] || '💌' : '💌';
+
+        // Replace single button with two-button block
+        const wrapper = document.createElement('div');
+        wrapper.className = 'card-actions';
+
+        const addBtn = document.createElement('button');
+        addBtn.className = 'btn-add-cart';
+        addBtn.innerHTML = '<i class="fa-solid fa-bag-shopping"></i> Adicionar ao Carrinho';
+        addBtn.addEventListener('click', () => {
+          addToCart(name, price, emoji);
+          addBtn.classList.add('added');
+          addBtn.innerHTML = '<i class="fa-solid fa-check"></i> Adicionado!';
+          setTimeout(() => {
+            addBtn.classList.remove('added');
+            addBtn.innerHTML = '<i class="fa-solid fa-bag-shopping"></i> Adicionar ao Carrinho';
+          }, 1500);
+          showToast(name + ' adicionado ao carrinho!');
+        });
+
+        // Keep WhatsApp as secondary link
+        oldBtn.style.background = 'transparent';
+        oldBtn.style.color = 'var(--whatsapp)';
+        oldBtn.style.border = '1.5px solid var(--whatsapp)';
+        oldBtn.style.fontSize = '0.78rem';
+        oldBtn.style.padding = '0.5rem';
+
+        wrapper.appendChild(addBtn);
+        wrapper.appendChild(oldBtn.cloneNode(true));
+        oldBtn.replaceWith(wrapper);
+      });
+    }
+
+    // === MODULE 1: NAVIGATION ===
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const header = document.getElementById('header');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+    });
+
+    // Close mobile menu on outside click
+    document.addEventListener('click', (e) => {
+      if (!header.contains(e.target)) {
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+      }
+    });
+
+    // Sticky header shadow on scroll
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // === MODULE 2: PRODUCT FILTER ===
+    const filterChips = document.querySelectorAll('.filter-chip');
+    const catalogCards = document.querySelectorAll('#catalogGrid .card');
+
+    function filterProducts(category) {
+      let delay = 0;
+      catalogCards.forEach((card) => {
+        const match = category === 'todos' || card.dataset.category === category;
+        if (match) {
+          card.classList.remove('hidden');
+          card.style.transitionDelay = delay + 'ms';
+          delay += 30;
+        } else {
+          card.classList.add('hidden');
+          card.style.transitionDelay = '0ms';
+        }
+      });
+    }
+
+    filterChips.forEach((chip) => {
+      chip.addEventListener('click', () => {
+        filterChips.forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        filterProducts(chip.dataset.filter);
+      });
+    });
+
+    // === MODULE 3: NAV LINK FILTER + SCROLL HANDLER ===
+    function handleNavLink(link) {
+      const filter = link.dataset.filter;
+      const target = link.getAttribute('href');
+
+      if (filter && target === '#catalogo') {
+        // Scroll to catalog section
+        document.getElementById('catalogo').scrollIntoView({ behavior: 'smooth' });
+        // Apply filter
+        filterChips.forEach(c => c.classList.remove('active'));
+        const matchChip = document.querySelector(`.filter-chip[data-filter="${filter}"]`);
+        if (matchChip) matchChip.classList.add('active');
+        filterProducts(filter);
+        // Close mobile menu
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+        return true;
+      }
+      return false;
+    }
+
+    document.querySelectorAll('a[data-filter]').forEach((link) => {
+      link.addEventListener('click', (e) => {
+        if (handleNavLink(link)) e.preventDefault();
+      });
+    });
+
+    // Footer filter links
+    document.querySelectorAll('.footer-col a[data-filter]').forEach((link) => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        document.getElementById('catalogo').scrollIntoView({ behavior: 'smooth' });
+        const filter = link.dataset.filter;
+        filterChips.forEach(c => c.classList.remove('active'));
+        const matchChip = document.querySelector(`.filter-chip[data-filter="${filter}"]`);
+        if (matchChip) matchChip.classList.add('active');
+        filterProducts(filter);
+      });
+    });
+
+    // === MODULE 4: INTERSECTION OBSERVER (card animations) ===
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    catalogCards.forEach((card, i) => {
+      card.style.transitionDelay = (i % 8) * 40 + 'ms';
+      card.style.transition = 'opacity 0.5s ease, transform 0.5s ease, box-shadow 0.3s ease';
+      observer.observe(card);
+    });
+
+    // Inject cart buttons into all cards
+    injectCartButtons();
+  </script>
+
+</body>
+</html>
