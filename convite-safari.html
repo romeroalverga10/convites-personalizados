@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Convite Safari</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(180deg, #629460 0%, #F4E8C1 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    .card {
+      background: #FFFBEC;
+      border-radius: 24px;
+      max-width: 420px;
+      width: 100%;
+      overflow: hidden;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.25);
+    }
+    .card-header {
+      background: linear-gradient(135deg, #2D5016, #629460);
+      padding: 1.5rem 1.5rem 1rem;
+      text-align: center;
+      position: relative;
+    }
+    .card-header img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #FFD700;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      margin-bottom: 0.75rem;
+    }
+    .card-header h1 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.4);
+      margin-bottom: 0.4rem;
+    }
+    .card-header .badge {
+      display: inline-block;
+      background: #FFD700;
+      color: #2D5016;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 0.3rem 1rem;
+      border-radius: 20px;
+    }
+    .animals {
+      font-size: 24px;
+      letter-spacing: 4px;
+      margin-top: 0.75rem;
+    }
+    .video-wrap {
+      padding: 1rem 1rem 0;
+    }
+    .video-wrap video {
+      width: 100%;
+      border-radius: 12px;
+      display: block;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    }
+    .info {
+      padding: 1rem;
+    }
+    .invite-title {
+      text-align: center;
+      font-size: 18px;
+      font-weight: 700;
+      color: #2D5016;
+      margin-bottom: 1rem;
+    }
+    .name-box {
+      background: rgba(255,255,255,0.9);
+      border: 1px solid #E0D3B0;
+      border-radius: 12px;
+      padding: 0.9rem;
+      text-align: center;
+      margin-bottom: 0.75rem;
+    }
+    .name-box .child-name {
+      font-size: 22px;
+      font-weight: 700;
+      color: #BF360C;
+    }
+    .name-box .child-age {
+      font-size: 14px;
+      font-weight: 600;
+      color: #558B2F;
+      margin-top: 0.2rem;
+    }
+    .details-box {
+      background: rgba(255,255,255,0.9);
+      border: 1px solid #E0D3B0;
+      border-radius: 12px;
+      padding: 0.9rem;
+      font-size: 14px;
+      color: #333;
+      margin-bottom: 0.75rem;
+    }
+    .details-box p { margin-bottom: 0.5rem; }
+    .details-box p:last-child { margin-bottom: 0; }
+    .footer-msg {
+      text-align: center;
+      font-size: 15px;
+      font-weight: 700;
+      color: #2D5016;
+      padding: 0.75rem 1rem 1.5rem;
+      border-top: 2px dashed #8B7355;
+      margin-top: 0.25rem;
+    }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <div class="card-header">
+    <img src="safari-party-2anos.png" alt="Safari Party" />
+    <h1>MEU SAFARI</h1>
+    <div class="badge">Mickey Safari • 2 Aninhos</div>
+    <div class="animals">🦁 🐘 🦒 🐵 🦓</div>
+  </div>
+
+  <div class="video-wrap">
+    <video src="grok-video-noah.mp4" controls playsinline></video>
+  </div>
+
+  <div class="info">
+    <p class="invite-title">🌿 Você foi convocado para uma Aventura! 🐘</p>
+
+    <div class="name-box">
+      <div class="child-name" id="childName">—</div>
+      <div class="child-age">Vai comemorar seus <strong>2</strong> aninhos!</div>
+    </div>
+
+    <div class="details-box">
+      <p>📅 <strong>DATA:</strong> <span id="childDate">—</span></p>
+      <p>🕐 <strong>HORA:</strong> <span id="childTime">—</span></p>
+      <p>📍 <strong>LOCAL:</strong> <span id="childLocal">—</span></p>
+    </div>
+  </div>
+
+  <div class="footer-msg">Prepare seu binóculo e venha festejar! 🦒</div>
+</div>
+
+<script>
+  const p = new URLSearchParams(window.location.search);
+  const nome  = p.get('nome')  || '—';
+  const data  = p.get('data')  || '';
+  const hora  = p.get('hora')  || '—';
+  const local = p.get('local') || '—';
+
+  document.getElementById('childName').textContent  = nome;
+  document.getElementById('childTime').textContent  = hora;
+  document.getElementById('childLocal').textContent = local;
+
+  if (data) {
+    const d = new Date(data + 'T00:00:00');
+    document.getElementById('childDate').textContent =
+      d.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' });
+  }
+
+  document.title = nome !== '—' ? `Convite de ${nome} — Safari Party` : 'Convite Safari';
+</script>
+
+</body>
+</html>
